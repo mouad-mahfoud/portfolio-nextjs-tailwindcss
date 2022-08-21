@@ -5,7 +5,7 @@ import { AiOutlineMail } from "react-icons/ai";
 
 const Main = () => {
   return (
-    <section className='w-full h-screen text-center'>
+    <section id='home' className='w-full h-screen text-center'>
       <div className='max-w-[1240px] w-full h-full mx-auto p-2 flex flex-col justify-center'>
         <p className='uppercase text-sm tracking-widest text-gray-600'>
           Let's build somting together

@@ -1,17 +1,32 @@
 /* eslint-disable react/no-unescaped-entities */
 import Image from "next/image";
 import Link from "next/link";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { AiOutlineMenu, AiOutlineClose, AiFillMail } from "react-icons/ai";
 import { FaFacebook, FaGithub, FaLinkedin, FaTwitter } from "react-icons/fa";
 
 const Navbar = () => {
   const [displauMobileNav, setDisplauMobileNav] = useState(false);
+  const [navbarShadow, setnavbarShadow] = useState(false);
+  const [linkColor, setLinkColor] = useState("#1f2937");
+
+  useEffect(() => {
+    window.addEventListener("scroll", () => {
+      if (window.scrollY >= 90) setnavbarShadow(true);
+      else setnavbarShadow(false);
+    });
+  }, []);
 
   const handleDisplauMobileNav = () => setDisplauMobileNav(!displauMobileNav);
 
   return (
-    <div className='fixed w-full h-20 shadow-xl z-[100]'>
+    <div
+      className={
+        navbarShadow
+          ? "fixed w-full h-20 shadow-xl bg-[#ecf0f3] z-[100]"
+          : "fixed w-full h-20 bg-[#ecf0f3] z-[100]"
+      }
+    >
       <div className='flex justify-between items-center w-full h-full px-2 2xl:px-16'>
         <Image
           src='/../public/assets/navLogo.png'
@@ -22,26 +37,25 @@ const Navbar = () => {
 
         {/* descktop navigation */}
         <nav>
-          <ul className='hidden md:flex'>
-            <Link href='/'>
-              <li className='text-sm uppercase ml-10 hover:border-b'>Home</li>
-            </Link>
-            <Link href='/'>
-              <li className='text-sm uppercase ml-10 hover:border-b'>About</li>
-            </Link>
-            <Link href='/'>
-              <li className='text-sm uppercase ml-10 hover:border-b'>Skills</li>
-            </Link>
-            <Link href='/'>
-              <li className='text-sm uppercase ml-10 hover:border-b'>
-                Projects
-              </li>
-            </Link>
-            <Link href='/'>
-              <li className='text-sm uppercase ml-10 hover:border-b'>
-                Contact
-              </li>
-            </Link>
+          <ul style={{ color: `${linkColor}` }} className='hidden md:flex'>
+            <li className='ml-10 text-sm uppercase hover:border-b'>
+              <Link href='/'>Home</Link>
+            </li>
+            <li className='ml-10 text-sm uppercase hover:border-b'>
+              <Link href='/#about'>About</Link>
+            </li>
+            <li className='ml-10 text-sm uppercase hover:border-b'>
+              <Link href='/#skills'>Skills</Link>
+            </li>
+            <li className='ml-10 text-sm uppercase hover:border-b'>
+              <Link href='/#projects'>Projects</Link>
+            </li>
+            <li className='ml-10 text-sm uppercase hover:border-b'>
+              <Link href='/resume'>Resume</Link>
+            </li>
+            <li className='ml-10 text-sm uppercase hover:border-b'>
+              <Link href='/#contact'>Contact</Link>
+            </li>
           </ul>
           {/* Hamburger Icon */}
           <div className='md:hidden ' onClick={handleDisplauMobileNav}>
